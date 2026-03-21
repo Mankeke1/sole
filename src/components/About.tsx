@@ -1,0 +1,114 @@
+"use client";
+
+import { useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+import Image from "next/image";
+import { CheckCircle2 } from "lucide-react";
+
+gsap.registerPlugin(ScrollTrigger);
+
+export default function About() {
+    const container = useRef<HTMLDivElement>(null);
+
+    useGSAP(
+        () => {
+            gsap.fromTo(".about-img",
+                { x: -50, opacity: 0 },
+                {
+                    scrollTrigger: {
+                        trigger: ".about-img",
+                        start: "top 90%",
+                    },
+                    x: 0,
+                    opacity: 1,
+                    duration: 0.8,
+                    ease: "power3.out"
+                }
+            );
+
+            gsap.fromTo(".about-text",
+                { x: 50, opacity: 0 },
+                {
+                    scrollTrigger: {
+                        trigger: ".about-text",
+                        start: "top 90%",
+                    },
+                    x: 0,
+                    opacity: 1,
+                    duration: 0.8,
+                    ease: "power3.out"
+                }
+            );
+
+            gsap.fromTo(".about-list-item",
+                { x: 20, opacity: 0 },
+                {
+                    scrollTrigger: {
+                        trigger: ".about-list",
+                        start: "top 90%",
+                    },
+                    x: 0,
+                    opacity: 1,
+                    stagger: 0.1,
+                    duration: 0.5,
+                    ease: "power2.out"
+                }
+            );
+        },
+        { scope: container }
+    );
+
+    return (
+        <section id="sobre-mi" ref={container} className="py-24 bg-white overflow-hidden">
+            <div className="max-w-7xl mx-auto px-6 lg:px-12">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+                    <div className="about-img relative rounded-2xl overflow-hidden aspect-[4/5] shadow-2xl shadow-navy/10">
+                        <Image
+                            src="/images/portrait.png"
+                            alt="Soledad Barrera - Prevencionista"
+                            fill
+                            className="object-cover object-top"
+                        />
+                        {/* Decor accent */}
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-yellow rounded-bl-full mix-blend-multiply opacity-80"></div>
+                    </div>
+
+                    <div className="about-text">
+                        <span className="text-yellow font-bold tracking-wider uppercase text-sm mb-3 block">Sobre mí</span>
+                        <h2 className="text-navy font-heading font-extrabold text-3xl md:text-5xl mb-6">
+                            Soledad Barrera Quiñelen
+                        </h2>
+                        <h3 className="text-deepblue font-bold text-xl mb-4">
+                            Experta en Prevención de Riesgos
+                        </h3>
+                        <p className="text-graytext text-lg leading-relaxed mb-6">
+                            Con más de 14 años dedicados a la seguridad y salud ocupacional, trabajo codo a codo con empresas del sector minero, industrial y de construcción en la Región de Atacama.
+                        </p>
+                        <p className="text-graytext text-lg leading-relaxed mb-8">
+                            Mi enfoque no es solo cumplir un papel, sino ayudar a crear ambientes de trabajo realmente seguros, donde las operaciones fluyan sin contratiempos y los equipos vuelvan sanos a casa. Como Relatora experta de la Mutual de Seguridad, sé cómo comunicar y capacitar para lograr resultados reales en terreno.
+                        </p>
+
+                        <ul className="about-list space-y-4">
+                            {[
+                                "14+ años de experiencia en minería e industria",
+                                "Relatora Oficial en Autoridades Competentes",
+                                "Asesoría externa dedicada y personalizada",
+                                "Conocimiento profundo de normativas chilenas",
+                                "Atención presencial en Copiapó / Atacama"
+                            ].map((item, idx) => (
+                                <li key={idx} className="about-list-item flex items-center gap-3">
+                                    <CheckCircle2 className="text-yellow" size={20} />
+                                    <span className="text-navy font-semibold text-base">{item}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    );
+}
