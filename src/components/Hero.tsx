@@ -169,7 +169,7 @@ export default function Hero() {
 
                     <div className="flex flex-wrap justify-center md:justify-start items-center gap-4 sm:gap-5 md:gap-4 lg:gap-6 xl:gap-8 mb-6 sm:mb-7 md:mb-4 lg:mb-6 xl:mb-8">
                         <div className="stat-gsap flex flex-col items-center md:items-start opacity-0 translate-y-[30px]">
-                            <span className="text-white font-heading font-extrabold text-2xl sm:text-3xl md:text-2xl lg:text-3xl xl:text-4xl">14+</span>
+                            <span className="text-white font-heading font-extrabold text-2xl sm:text-3xl md:text-2xl lg:text-3xl xl:text-4xl">14</span>
                             <span className="text-white/60 text-[10px] sm:text-xs md:text-[10px] lg:text-sm">Años de exp.</span>
                         </div>
                         <div className="stat-gsap hidden sm:block w-[1px] h-8 sm:h-10 md:h-8 lg:h-10 xl:h-12 bg-white/20 opacity-0 translate-y-[30px]"></div>

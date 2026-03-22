@@ -94,7 +94,7 @@ export default function About() {
 
                         <ul className="about-list space-y-3 sm:space-y-4">
                             {[
-                                "14+ años de experiencia en minería e industria",
+                                "14 años de experiencia en minería e industria",
                                 "Relatora Oficial en Autoridades Competentes",
                                 "Asesoría externa dedicada y personalizada",
                                 "Conocimiento profundo de normativas chilenas",

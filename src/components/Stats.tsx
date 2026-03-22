@@ -51,7 +51,7 @@ export default function Stats() {
 
                     <div className="stat-box bg-white p-5 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center text-center">
                         <h3 className="text-yellow font-heading font-extrabold text-3xl sm:text-4xl lg:text-5xl mb-1 sm:mb-2">
-                            <span className="stat-counter" data-target="14">0</span>+
+                            <span className="stat-counter" data-target="14">0</span>
                         </h3>
                         <p className="text-navy font-bold text-[11px] sm:text-xs lg:text-sm uppercase tracking-wide">Años de experiencia</p>
                         <p className="text-graytext text-[11px] sm:text-xs lg:text-sm mt-2 sm:mt-3 hidden sm:block">Trayectoria real protegiendo operaciones en terreno.</p>
