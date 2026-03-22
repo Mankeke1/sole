@@ -208,17 +208,17 @@ export default function Hero() {
 
             {/* ===== DESKTOP/TABLET SIDE IMAGE (visible only >= md) ===== */}
             {/* Yellow line background */}
-            <div className="decor-line-gsap hidden md:block absolute md:right-0 md:top-0 h-full md:w-[50%] xl:w-[48%] bg-yellow z-0 md:clip-path-polygon origin-top scale-y-0"></div>
+            <div className="decor-line-gsap hidden md:block absolute right-0 top-0 bottom-0 md:w-[50%] xl:w-[48%] bg-yellow z-0 md:clip-path-polygon origin-top scale-y-0"></div>
 
             {/* Right image panel */}
-            <div className="hero-right-gsap hidden md:block md:absolute md:right-0 md:top-0 md:h-full md:w-[50%] xl:w-[48%] z-10 md:clip-path-polygon-inner opacity-0 translate-x-[60px]">
+            <div className="hero-right-gsap hidden md:block absolute right-0 top-0 bottom-0 md:w-[50%] xl:w-[48%] z-10 md:clip-path-polygon-inner opacity-0 translate-x-[60px]">
                 <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/60 to-transparent z-10"></div>
                 <div className="absolute inset-0 bg-navy/20 z-10 mix-blend-multiply"></div>
 
                 <img
                     src={`${basePath}/images/capacitacion.jpg`}
                     alt="Capacitación en prevención de riesgos"
-                    className="absolute inset-0 w-full h-full object-cover object-center"
+                    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
                 />
             </div>
 
