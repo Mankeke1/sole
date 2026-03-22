@@ -127,11 +127,12 @@ export default function Hero() {
                     src={`${basePath}/images/capacitacion.jpg`}
                     alt="Capacitación en prevención de riesgos"
                     className="absolute inset-0 w-full h-full object-cover object-center"
+                    style={{ transform: 'scale(1.15)', transformOrigin: 'center center' }}
                 />
                 {/* Dark overlay for readability */}
-                <div className="absolute inset-0 bg-navy/85"></div>
+                <div className="absolute inset-0 bg-navy/70"></div>
                 {/* Bottom gradient fade */}
-                <div className="absolute inset-0 bg-gradient-to-b from-navy/60 via-transparent to-navy/90"></div>
+                <div className="absolute inset-0 bg-gradient-to-b from-navy/40 via-transparent to-navy/80"></div>
             </div>
 
             {/* Particles - spread across entire hero */}
