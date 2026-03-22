@@ -5,8 +5,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import anime from "animejs";
 import Image from "next/image";
-import Link from "next/link";
-import { ArrowRight, MessageCircle } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export default function Hero() {
     const container = useRef<HTMLDivElement>(null);
@@ -29,7 +28,6 @@ export default function Hero() {
         () => {
             const tl = gsap.timeline();
 
-            // GSAP Sequence
             tl.to(".decor-line-gsap", { scaleY: 1, duration: 0.8, ease: "power3.out" }, 0)
                 .to(".hero-right-gsap", { x: 0, opacity: 1, duration: 1.2, ease: "power4.out" }, 0.1)
                 .to(".badge-gsap", { y: 0, opacity: 1, duration: 0.6, ease: "power2.out" }, 0.3)
@@ -45,33 +43,39 @@ export default function Hero() {
     );
 
     useEffect(() => {
-        // Anime.js specific animations
         const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         if (prefersReducedMotion) return;
 
-        // Particles
+        // Particles - spread across entire hero
         const particlesContainer = document.querySelector(".particles-gsap");
         if (particlesContainer) {
-            for (let i = 0; i < 15; i++) {
+            const count = window.innerWidth < 768 ? 15 : 25;
+            for (let i = 0; i < count; i++) {
                 const p = document.createElement("div");
-                p.className = "absolute bg-yellow/20 rounded-full pointer-events-none";
-                const size = Math.random() * 4 + 4;
+                p.className = "absolute rounded-full pointer-events-none";
+                const size = Math.random() * 6 + 2;
                 p.style.width = `${size}px`;
                 p.style.height = `${size}px`;
                 p.style.left = `${Math.random() * 100}%`;
                 p.style.top = `${Math.random() * 100}%`;
+                p.style.backgroundColor = size > 5 ? "rgba(224, 175, 49, 0.25)" : "rgba(224, 175, 49, 0.15)";
                 particlesContainer.appendChild(p);
 
                 anime({
                     targets: p,
-                    translateY: () => anime.random(-20, 20),
+                    translateX: () => anime.random(-30, 30),
+                    translateY: () => anime.random(-30, 30),
                     opacity: [
-                        { value: anime.random(10, 40) / 100, duration: 0 },
-                        { value: anime.random(10, 40) / 100, duration: anime.random(3000, 6000) },
+                        { value: anime.random(5, 20) / 100, duration: 0 },
+                        { value: anime.random(15, 45) / 100, duration: anime.random(3000, 7000) },
+                    ],
+                    scale: [
+                        { value: anime.random(80, 120) / 100, duration: anime.random(4000, 8000) },
                     ],
                     direction: "alternate",
                     loop: true,
                     easing: "easeInOutSine",
+                    delay: anime.random(0, 2000),
                 });
             }
         }
@@ -85,7 +89,7 @@ export default function Hero() {
             easing: "easeInOutQuart",
         });
 
-        // Word rotator using Anime.js
+        // Word rotator
         let wordIndex = 0;
         const wordInterval = setInterval(() => {
             wordIndex = (wordIndex + 1) % words.length;
@@ -113,70 +117,87 @@ export default function Hero() {
     }, [words]);
 
     return (
-        <section id="inicio" ref={container} className="relative w-full min-h-[100vh] lg:h-screen bg-navy flex flex-col lg:flex-row overflow-hidden pt-24 lg:pt-0">
+        <section id="inicio" ref={container} className="relative w-full min-h-[100svh] md:min-h-screen bg-navy flex flex-col md:flex-row overflow-hidden">
+
+            {/* ===== MOBILE BACKGROUND IMAGE (visible only < md) ===== */}
+            <div className="absolute inset-0 md:hidden z-0">
+                <Image
+                    src="/images/capacitacion.jpg"
+                    alt="Capacitación en prevención de riesgos"
+                    fill
+                    priority
+                    className="object-cover object-center"
+                    sizes="100vw"
+                />
+                {/* Dark overlay for readability */}
+                <div className="absolute inset-0 bg-navy/85"></div>
+                {/* Bottom gradient fade */}
+                <div className="absolute inset-0 bg-gradient-to-b from-navy/60 via-transparent to-navy/90"></div>
+            </div>
+
+            {/* Particles - spread across entire hero */}
+            <div className="particles-gsap absolute inset-0 overflow-hidden z-[5] pointer-events-none"></div>
 
             {/* LEFT PANEL */}
-            <div className="relative w-full xl:w-[55%] lg:w-[60%] h-full flex flex-col justify-center px-6 lg:pl-[8vw] xl:pl-[10vw] lg:pr-24 z-10 pb-20 lg:pb-0">
+            <div className="relative w-full md:w-[60%] lg:w-[60%] xl:w-[55%] h-full flex flex-col justify-center px-5 sm:px-6 md:pl-[4vw] lg:pl-[5vw] xl:pl-[8vw] 2xl:pl-[10vw] md:pr-8 lg:pr-12 xl:pr-20 z-10 pt-24 pb-12 sm:pt-28 sm:pb-16 md:pt-20 md:pb-0">
 
-                {/* Decor Lines & Particles */}
-                <div className="particles-gsap absolute inset-0 overflow-hidden z-0"></div>
 
-                <div className="relative z-10 max-w-[620px] mx-auto lg:mx-0 text-center lg:text-left">
+                <div className="relative z-10 max-w-[620px] mx-auto md:mx-0 text-center md:text-left">
 
-                    <div className="badge-gsap inline-flex items-center px-4 py-1.5 border border-yellow/40 bg-yellow/10 rounded-full text-white text-xs lg:text-sm font-medium mb-6 lg:mb-8 opacity-0 translate-y-[-20px]">
+                    <div className="badge-gsap inline-flex items-center px-3 sm:px-4 py-1.5 border border-yellow/40 bg-yellow/10 rounded-full text-white text-[11px] sm:text-xs md:text-xs lg:text-sm font-medium mb-4 sm:mb-5 md:mb-4 lg:mb-6 opacity-0 translate-y-[-20px]">
                         ⭐ Relatora Oficial &middot; Mutual de Seguridad CChC
                     </div>
 
-                    <h1 className="font-heading mb-6 tracking-tight">
-                        <span className="title1-gsap block text-yellow font-bold text-xs lg:text-sm tracking-[0.2em] mb-3 opacity-0 translate-x-[-40px] uppercase">
-                            Prevención de Riesgos en Copiapó
+                    <h1 className="font-heading mb-3 sm:mb-5 md:mb-3 lg:mb-4 tracking-tight">
+                        <span className="title1-gsap block text-yellow font-bold text-[10px] sm:text-xs md:text-[11px] lg:text-sm tracking-[0.2em] mb-2 opacity-0 translate-x-[-40px] uppercase">
+                            Ingeniera en Prevención de Riesgos
                         </span>
-                        <span className="title2-gsap block text-white font-extrabold text-4xl lg:text-[56px] leading-[1.05] opacity-0 translate-x-[-60px] pb-1">
-                            14 años protegiendo
+                        <span className="title2-gsap block text-white font-extrabold text-3xl sm:text-4xl md:text-[32px] lg:text-[40px] xl:text-[48px] 2xl:text-[56px] leading-[1.1] opacity-0 translate-x-[-60px] pb-1">
+                            14 años de experiencia
                         </span>
-                        <span className="title3-gsap block text-white font-extrabold text-4xl lg:text-[56px] leading-[1.05] opacity-0 flex flex-col">
-                            <span className="block mb-1 lg:mb-2">lo que más</span>
+                        <span className="title3-gsap block text-white font-extrabold text-3xl sm:text-4xl md:text-[32px] lg:text-[40px] xl:text-[48px] 2xl:text-[56px] leading-[1.1] opacity-0 flex flex-col">
+                            <span className="block mb-1">protegiendo lo que más</span>
                             <span className="relative text-yellow h-[1.2em] w-full block">
-                                <span className="rotator-word absolute left-0 top-0">{currentWord}</span>
+                                <span className="rotator-word absolute left-1/2 -translate-x-1/2 md:left-0 md:translate-x-0 top-0">{currentWord}</span>
                             </span>
                         </span>
                     </h1>
 
-                    <p className="desc-gsap text-white/80 text-[15px] lg:text-lg leading-relaxed mb-10 max-w-[480px] mx-auto lg:mx-0 opacity-0 translate-y-[20px] font-light">
-                        Asesoría experta en seguridad y salud ocupacional para empresas mineras, industriales y de construcción en la Región de Atacama. Cumplimiento normativo y prevención real en terreno.
+                    <p className="desc-gsap text-white/80 text-sm sm:text-[15px] md:text-sm lg:text-base xl:text-lg leading-relaxed mb-6 sm:mb-7 md:mb-4 lg:mb-6 xl:mb-8 max-w-[480px] mx-auto md:mx-0 opacity-0 translate-y-[20px] font-light">
+                        Asesoría especializada en seguridad y salud ocupacional, impulsando operaciones más seguras, eficientes y alineadas con la normativa vigente.
                     </p>
 
-                    <div className="flex flex-wrap justify-center lg:justify-start items-center gap-6 lg:gap-8 mb-10">
-                        <div className="stat-gsap flex flex-col items-center lg:items-start opacity-0 translate-y-[30px]">
-                            <span className="text-white font-heading font-extrabold text-3xl lg:text-4xl">14+</span>
-                            <span className="text-white/60 text-xs lg:text-sm">Años de exp.</span>
+                    <div className="flex flex-wrap justify-center md:justify-start items-center gap-4 sm:gap-5 md:gap-4 lg:gap-6 xl:gap-8 mb-6 sm:mb-7 md:mb-4 lg:mb-6 xl:mb-8">
+                        <div className="stat-gsap flex flex-col items-center md:items-start opacity-0 translate-y-[30px]">
+                            <span className="text-white font-heading font-extrabold text-2xl sm:text-3xl md:text-2xl lg:text-3xl xl:text-4xl">14+</span>
+                            <span className="text-white/60 text-[10px] sm:text-xs md:text-[10px] lg:text-sm">Años de exp.</span>
                         </div>
-                        <div className="stat-gsap hidden lg:block w-[1px] h-12 bg-white/20 opacity-0 translate-y-[30px]"></div>
-                        <div className="stat-gsap flex flex-col items-center lg:items-start opacity-0 translate-y-[30px]">
-                            <span className="text-white font-heading font-extrabold text-3xl lg:text-4xl">Copiapó</span>
-                            <span className="text-white/60 text-xs lg:text-sm">Operaciones</span>
+                        <div className="stat-gsap hidden sm:block w-[1px] h-8 sm:h-10 md:h-8 lg:h-10 xl:h-12 bg-white/20 opacity-0 translate-y-[30px]"></div>
+                        <div className="stat-gsap flex flex-col items-center md:items-start opacity-0 translate-y-[30px]">
+                            <span className="text-white font-heading font-extrabold text-2xl sm:text-3xl md:text-2xl lg:text-3xl xl:text-4xl">14</span>
+                            <span className="text-white/60 text-[10px] sm:text-xs md:text-[10px] lg:text-sm">Empresas asesoradas</span>
                         </div>
-                        <div className="stat-gsap hidden sm:block lg:block w-[1px] h-12 bg-white/20 opacity-0 translate-y-[30px]"></div>
-                        <div className="stat-gsap flex flex-col items-center lg:items-start opacity-0 translate-y-[30px]">
-                            <span className="text-white font-heading font-extrabold text-xl lg:text-2xl mt-1 lg:mt-2 mb-1">Minería / Indus.</span>
-                            <span className="text-white/60 text-xs lg:text-sm">Sectores</span>
+                        <div className="stat-gsap hidden sm:block w-[1px] h-8 sm:h-10 md:h-8 lg:h-10 xl:h-12 bg-white/20 opacity-0 translate-y-[30px]"></div>
+                        <div className="stat-gsap flex flex-col items-center md:items-start opacity-0 translate-y-[30px]">
+                            <span className="text-white font-heading font-extrabold text-lg sm:text-xl md:text-lg lg:text-xl xl:text-2xl">Minería / Indus.</span>
+                            <span className="text-white/60 text-[10px] sm:text-xs md:text-[10px] lg:text-sm">Sectores</span>
                         </div>
                     </div>
 
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-10 w-full sm:w-auto">
-                        <a href="#contacto" onClick={(e) => handleSmoothScroll(e, "#contacto")} className="btn-gsap inline-flex justify-center items-center gap-2 bg-yellow text-navy font-bold px-8 py-3.5 rounded-md hover:bg-[#dca029] transition-transform hover:-translate-y-0.5 opacity-0 translate-y-[30px] w-full sm:w-auto text-center">
+                    <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center md:justify-start mb-0 md:mb-4 lg:mb-6 xl:mb-8 w-full sm:w-auto">
+                        <a href="#contacto" onClick={(e) => handleSmoothScroll(e, "#contacto")} className="btn-gsap inline-flex justify-center items-center gap-2 bg-yellow text-navy font-bold px-6 sm:px-8 py-3 sm:py-3.5 rounded-md hover:bg-[#dca029] transition-transform hover:-translate-y-0.5 opacity-0 translate-y-[30px] w-full sm:w-auto text-center text-sm sm:text-base">
                             Solicitar asesoría <ArrowRight size={18} />
                         </a>
-                        <a href="#servicios" onClick={(e) => handleSmoothScroll(e, "#servicios")} className="btn-gsap inline-flex justify-center items-center gap-2 border-2 border-white/80 text-white font-medium px-8 py-3.5 rounded-md hover:bg-white/10 transition-colors opacity-0 translate-y-[30px] w-full sm:w-auto text-center">
+                        <a href="#servicios" onClick={(e) => handleSmoothScroll(e, "#servicios")} className="btn-gsap inline-flex justify-center items-center gap-2 border-2 border-white/80 text-white font-medium px-6 sm:px-8 py-3 sm:py-3.5 rounded-md hover:bg-white/10 transition-colors opacity-0 translate-y-[30px] w-full sm:w-auto text-center text-sm sm:text-base">
                             Ver servicios
                         </a>
                     </div>
 
-                    <div className="trust-gsap opacity-0 border-t border-white/10 pt-6 hidden lg:block mt-8">
-                        <span className="block text-white/40 text-[10px] uppercase tracking-[0.15em] mb-3">Experiencia comprobada en:</span>
-                        <div className="flex flex-wrap gap-2 lg:gap-3">
+                    <div className="trust-gsap opacity-0 border-t border-white/10 pt-3 lg:pt-4 hidden md:block mt-2 lg:mt-4">
+                        <span className="block text-white/40 text-[10px] uppercase tracking-[0.15em] mb-2 lg:mb-3">Experiencia comprobada en:</span>
+                        <div className="flex flex-wrap gap-1.5 md:gap-2">
                             {["Ley 16.744", "DS 40", "DS 594", "SERNAGEOMIN", "Mutual de Seguridad"].map((badge) => (
-                                <span key={badge} className="px-3 py-1 bg-white/5 border border-white/10 rounded-md text-white/80 text-[11px] lg:text-xs">
+                                <span key={badge} className="px-2 md:px-2.5 lg:px-3 py-1 bg-white/5 border border-white/10 rounded-md text-white/80 text-[9px] md:text-[10px] lg:text-xs">
                                     {badge}
                                 </span>
                             ))}
@@ -186,41 +207,40 @@ export default function Hero() {
                 </div>
             </div>
 
-            {/* YELLOW LINE BACKGROUND (Forms the angled 3px border on the left edge of the right panel) */}
-            <div className="decor-line-gsap hidden lg:block absolute lg:right-0 lg:top-0 h-full lg:w-[50%] xl:w-[48%] bg-yellow z-0 lg:clip-path-polygon origin-top scale-y-0"></div>
+            {/* ===== DESKTOP/TABLET SIDE IMAGE (visible only >= md) ===== */}
+            {/* Yellow line background */}
+            <div className="decor-line-gsap hidden md:block absolute md:right-0 md:top-0 h-full md:w-[50%] xl:w-[48%] bg-yellow z-0 md:clip-path-polygon origin-top scale-y-0"></div>
 
-            {/* RIGHT PANEL */}
-            <div className="hero-right-gsap relative w-full lg:absolute lg:right-0 lg:top-0 h-[40vh] lg:h-full lg:w-[50%] xl:w-[48%] z-10 lg:clip-path-polygon-inner opacity-0 translate-x-[60px]">
-                {/* Abstract Dark Layer Over Image */}
-                <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/40 to-transparent z-10 lg:from-navy lg:via-navy/60 lg:to-transparent"></div>
+            {/* Right image panel */}
+            <div className="hero-right-gsap hidden md:block md:absolute md:right-0 md:top-0 md:h-full md:w-[50%] xl:w-[48%] z-10 md:clip-path-polygon-inner opacity-0 translate-x-[60px]">
+                <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/60 to-transparent z-10"></div>
                 <div className="absolute inset-0 bg-navy/20 z-10 mix-blend-multiply"></div>
 
                 <Image
-                    src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1600"
-                    alt="Seguridad y prevención"
+                    src="/images/capacitacion.jpg"
+                    alt="Capacitación en prevención de riesgos"
                     fill
                     priority
                     className="object-cover object-center"
+                    sizes="50vw"
                 />
-
             </div>
 
-            {/* Scroll indicator (Moved to Right Panel in Desktop for elegance and avoid overlap) */}
-            <div className="hidden lg:flex absolute bottom-10 right-12 flex-col items-center gap-3 z-20 opacity-60 hover:opacity-100 transition-opacity">
+            {/* Scroll indicator */}
+            <div className="hidden md:flex absolute bottom-10 right-12 flex-col items-center gap-3 z-20 opacity-60 hover:opacity-100 transition-opacity">
                 <span className="text-white text-[9px] uppercase tracking-[0.3em] rotate-90 mb-6">Scroll</span>
                 <div className="h-16 w-[1px] bg-white/20 relative overflow-hidden">
                     <div className="scroll-line-anime absolute top-0 left-0 w-full h-full bg-yellow origin-top"></div>
                 </div>
             </div>
 
-            {/* Styles injected for layout features */}
             <style dangerouslySetInnerHTML={{
                 __html: `
-        @media (min-width: 1024px) {
-          .lg\\:clip-path-polygon {
+        @media (min-width: 768px) {
+          .md\\:clip-path-polygon {
             clip-path: polygon(8% 0, 100% 0, 100% 100%, 0% 100%);
           }
-          .lg\\:clip-path-polygon-inner {
+          .md\\:clip-path-polygon-inner {
             clip-path: polygon(calc(8% + 4px) 0, 100% 0, 100% 100%, 4px 100%);
           }
         }

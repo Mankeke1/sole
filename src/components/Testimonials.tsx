@@ -36,7 +36,7 @@ export default function Testimonials() {
                 {
                     scrollTrigger: {
                         trigger: ".test-header",
-                        start: "top 90%",
+                        start: "top 95%",
                     },
                     y: 0,
                     opacity: 1,
@@ -50,7 +50,7 @@ export default function Testimonials() {
                 {
                     scrollTrigger: {
                         trigger: ".test-grid",
-                        start: "top 90%",
+                        start: "top 95%",
                     },
                     y: 0,
                     opacity: 1,
@@ -64,34 +64,34 @@ export default function Testimonials() {
     );
 
     return (
-        <section id="testimonios" ref={container} className="py-24 bg-white">
-            <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        <section id="testimonios" ref={container} className="py-16 sm:py-20 lg:py-24 bg-white">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
 
-                <div className="test-header text-center max-w-2xl mx-auto mb-16">
-                    <span className="text-yellow font-bold tracking-wider uppercase text-sm mb-3 block">Lo que dicen las empresas</span>
-                    <h2 className="text-navy font-heading font-extrabold text-3xl md:text-5xl mb-6">
+                <div className="test-header text-center max-w-2xl mx-auto mb-10 sm:mb-14 lg:mb-16">
+                    <span className="text-yellow font-bold tracking-wider uppercase text-xs sm:text-sm mb-2 sm:mb-3 block">Lo que dicen las empresas</span>
+                    <h2 className="text-navy font-heading font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-4 sm:mb-6">
                         Confianza respaldada por clientes reales
                     </h2>
                 </div>
 
-                <div className="test-grid grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="test-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
                     {testimonials.map((test, idx) => (
                         <div
                             key={idx}
-                            className="test-card bg-lightgray rounded-2xl p-8 relative hover:-translate-y-2 transition-transform duration-300"
+                            className="test-card bg-lightgray rounded-xl sm:rounded-2xl p-6 sm:p-7 lg:p-8 relative hover:-translate-y-2 transition-transform duration-300"
                         >
-                            <Quote className="text-yellow/30 absolute top-6 right-6" size={48} />
+                            <Quote className="text-yellow/30 absolute top-5 sm:top-6 right-5 sm:right-6" size={36} />
 
                             <div className="relative z-10 h-full flex flex-col">
-                                <p className="text-graytext text-[15px] leading-relaxed italic mb-8 flex-grow">
-                                    "{test.quote}"
+                                <p className="text-graytext text-sm sm:text-[15px] leading-relaxed italic mb-6 sm:mb-8 flex-grow">
+                                    &ldquo;{test.quote}&rdquo;
                                 </p>
 
-                                <div className="border-t border-gray-200 pt-4 mt-auto">
-                                    <h4 className="font-bold text-navy text-sm uppercase tracking-wide">
+                                <div className="border-t border-gray-200 pt-3 sm:pt-4 mt-auto">
+                                    <h4 className="font-bold text-navy text-xs sm:text-sm uppercase tracking-wide">
                                         {test.author}
                                     </h4>
-                                    <span className="text-graytext text-xs">
+                                    <span className="text-graytext text-[10px] sm:text-xs">
                                         {test.role}
                                     </span>
                                 </div>

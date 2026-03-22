@@ -36,7 +36,7 @@ export default function Differentiators() {
                 {
                     scrollTrigger: {
                         trigger: container.current,
-                        start: "top 90%",
+                        start: "top 95%",
                     },
                     y: 0,
                     opacity: 1,
@@ -50,7 +50,7 @@ export default function Differentiators() {
                 {
                     scrollTrigger: {
                         trigger: ".diff-grid",
-                        start: "top 90%",
+                        start: "top 95%",
                     },
                     y: 0,
                     opacity: 1,
@@ -64,37 +64,37 @@ export default function Differentiators() {
     );
 
     return (
-        <section id="diferenciales" ref={container} className="py-24 bg-navy relative overflow-hidden">
+        <section id="diferenciales" ref={container} className="py-16 sm:py-20 lg:py-24 bg-navy relative overflow-hidden">
             {/* Background Decor */}
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-yellow rounded-full mix-blend-overlay opacity-5 blur-[100px] pointer-events-none"></div>
+            <div className="absolute top-0 right-0 w-[300px] sm:w-[400px] lg:w-[500px] h-[300px] sm:h-[400px] lg:h-[500px] bg-yellow rounded-full mix-blend-overlay opacity-5 blur-[100px] pointer-events-none"></div>
 
-            <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
 
-                <div className="diff-header text-center max-w-2xl mx-auto mb-16">
-                    <span className="text-yellow font-bold tracking-wider uppercase text-sm mb-3 block">Por qué elegirme</span>
-                    <h2 className="text-white font-heading font-extrabold text-3xl md:text-5xl mb-6">
+                <div className="diff-header text-center max-w-2xl mx-auto mb-10 sm:mb-14 lg:mb-16">
+                    <span className="text-yellow font-bold tracking-wider uppercase text-xs sm:text-sm mb-2 sm:mb-3 block">Por qué elegirme</span>
+                    <h2 className="text-white font-heading font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-4 sm:mb-6">
                         Diferencia que se nota en terreno
                     </h2>
-                    <p className="text-white/70 text-lg leading-relaxed">
+                    <p className="text-white/70 text-sm sm:text-base lg:text-lg leading-relaxed">
                         La prevención no se trata solo de llenar papeles; se trata de liderazgo, empatía y conocimiento técnico aplicado a la realidad operativa de tu empresa.
                     </p>
                 </div>
 
-                <div className="diff-grid grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="diff-grid grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 lg:gap-6">
                     {diffs.map((item, idx) => (
                         <div
                             key={idx}
-                            className="diff-card group bg-deepblue border border-white/10 rounded-2xl p-8 hover:bg-white/5 transition-colors duration-300"
+                            className="diff-card group bg-deepblue border border-white/10 rounded-xl sm:rounded-2xl p-6 sm:p-7 lg:p-8 hover:bg-white/5 transition-colors duration-300"
                         >
-                            <div className="flex items-start gap-4">
-                                <div className="w-10 h-10 mt-1 flex-shrink-0 bg-yellow/10 rounded-full flex items-center justify-center text-yellow font-bold">
+                            <div className="flex items-start gap-3 sm:gap-4">
+                                <div className="w-9 h-9 sm:w-10 sm:h-10 mt-0.5 sm:mt-1 flex-shrink-0 bg-yellow/10 rounded-full flex items-center justify-center text-yellow font-bold text-sm sm:text-base">
                                     {idx + 1}
                                 </div>
                                 <div>
-                                    <h3 className="text-xl font-heading font-bold text-white mb-3 group-hover:text-yellow transition-colors">
+                                    <h3 className="text-base sm:text-lg lg:text-xl font-heading font-bold text-white mb-2 sm:mb-3 group-hover:text-yellow transition-colors">
                                         {item.title}
                                     </h3>
-                                    <p className="text-white/70 leading-relaxed">
+                                    <p className="text-white/70 text-sm sm:text-base leading-relaxed">
                                         {item.desc}
                                     </p>
                                 </div>
