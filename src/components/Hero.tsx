@@ -4,8 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import anime from "animejs";
-import Image from "next/image";
+
 import { ArrowRight } from "lucide-react";
+
+const basePath = process.env.NODE_ENV === 'production' ? '/sole' : '';
 
 export default function Hero() {
     const container = useRef<HTMLDivElement>(null);
@@ -121,13 +123,10 @@ export default function Hero() {
 
             {/* ===== MOBILE BACKGROUND IMAGE (visible only < md) ===== */}
             <div className="absolute inset-0 md:hidden z-0">
-                <Image
-                    src="/images/capacitacion.jpg"
+                <img
+                    src={`${basePath}/images/capacitacion.jpg`}
                     alt="Capacitación en prevención de riesgos"
-                    fill
-                    priority
-                    className="object-cover object-center"
-                    sizes="100vw"
+                    className="absolute inset-0 w-full h-full object-cover object-center"
                 />
                 {/* Dark overlay for readability */}
                 <div className="absolute inset-0 bg-navy/85"></div>
@@ -216,13 +215,10 @@ export default function Hero() {
                 <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/60 to-transparent z-10"></div>
                 <div className="absolute inset-0 bg-navy/20 z-10 mix-blend-multiply"></div>
 
-                <Image
-                    src="/images/capacitacion.jpg"
+                <img
+                    src={`${basePath}/images/capacitacion.jpg`}
                     alt="Capacitación en prevención de riesgos"
-                    fill
-                    priority
-                    className="object-cover object-center"
-                    sizes="50vw"
+                    className="absolute inset-0 w-full h-full object-cover object-center"
                 />
             </div>
 
