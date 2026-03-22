@@ -67,12 +67,11 @@ export default function About() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
 
-                    <div className="about-img relative rounded-xl sm:rounded-2xl overflow-hidden aspect-[3/4] sm:aspect-[3/4] lg:aspect-[4/5] shadow-2xl shadow-navy/10 max-w-[400px] mx-auto lg:mx-0 lg:max-w-none">
+                    <div className="about-img relative rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl shadow-navy/10 max-w-[400px] mx-auto lg:mx-0 lg:max-w-none">
                         <img
                             src={`${basePath}/images/portrait.png`}
                             alt="Soledad Barrera - Prevencionista"
-                            className="absolute inset-0 w-full h-full object-cover"
-                            style={{ objectPosition: '50% 20%' }}
+                            className="w-full h-auto object-cover block"
                         />
                         {/* Decor accent */}
                         <div className="absolute top-0 right-0 w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 bg-yellow rounded-bl-full mix-blend-multiply opacity-80"></div>
